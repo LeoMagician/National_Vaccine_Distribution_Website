@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 22, 2015 2:13:23 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.leo.model.models.Cart" table="cart">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="priceTotal" type="float">
+            <column name="priceTotal" />
+        </property>
+        <property name="date" type="java.util.Calendar" not-null="true">
+            <column name="date" />
+        </property>
+        <set name="orderItems" table="orderItem" inverse="true" cascade="all">
+        	<key column="cartId" />
+        	<one-to-many class="com.leo.model.models.OrderItem" />
+        </set>
+        <property name="phdEnable" column="phdEnable" type="boolean" not-null="false"/>
+        <property name="cdcEnable" column="cdcEnable" type="boolean" not-null="false"/>
+        <property name="manuEnable" column="manuEnable" type="boolean" not-null="false"/>
+        <property name="disEnable" column="disEnable" type="boolean" not-null="false"/>
+        <property name="dcEnable" column="dcEnable" type="boolean" not-null="false"/> 
+        <property name="hosEnable" column="hosEnable" type="boolean" not-null="false"/>          
+        <property name="status" >
+            <column name="status" sql-type="char(64)" not-null="false"/>
+        </property>          
+        <many-to-one name="account" class="com.leo.model.models.Account" cascade="save-update">
+            <column name="accountId" />
+        </many-to-one>
+        <property name="accountId" insert="false" update="false">
+            <column name="accountId" sql-type="char(32)" not-null="false"/>
+        </property>
+        <many-to-one name="dc" class="com.leo.model.models.DC" unique="true">
+        		<column name="dcId"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

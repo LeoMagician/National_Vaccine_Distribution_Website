@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>  
+    <class name="com.leo.model.models.Account" table="account" lazy="false">  
+
+		<id name="id" column="id" type="integer" >
+		  <generator class="native" >            	
+            </generator>
+		</id>
+		
+		<version name="version" column="version" type="integer"/>
+		<property name="enable" column="enable" type="boolean" not-null="true"/>
+		<property name="name" column="name" type="string" not-null="true"/>
+		<property name="email" column="email" type="string" not-null="true"/>	
+		<property name="username" column="username" type="string" not-null="true" unique="true"/>
+		<property name="password" column="password" type="string" not-null="true"/>
+		<property name="registerTime" column="registerTime" type="calendar" not-null="true"/>
+		<many-to-one name ="role" class="com.leo.model.models.Role" foreign-key="FK_account_role" index="IDX_account_roleId">
+		  <column name="roleId" not-null="false"/>
+		</many-to-one>
+		<many-to-one name ="organization" class="com.leo.model.models.Organization" foreign-key="FK_account_organization" index="IDX_account_organizationId">
+		  <column name="organizationId" not-null="false"/>
+		</many-to-one>
+		<set name="carts" table="cart" inverse="true" cascade="all">
+        	<key column="accountId" />
+        	<one-to-many class="com.leo.model.models.Cart" />
+        </set>
+        <many-to-one name="hospital" class="com.leo.model.models.Hospital">
+            <column name="hospitalId" />
+        </many-to-one>        
+        <property name="hospitalId" insert="false" update="false">
+            <column name="hospitalId" sql-type="char(32)" not-null="false"/>
+        </property>
+        <!-- <one-to-one cascade="delete,save-update" name="dc" class="com.leo.model.models.DC" property-ref="account"></one-to-one> -->
+	 	<!-- <many-to-one name ="hospital" class="com.leo.model.models.Hospital" foreign-key="FK_account_hospital" index="IDX_account_hospitalId">
+		  <column name="hospitalId" not-null="false"/>
+		</many-to-one> -->
+		<!--  <one-to-one name="hospital" class="com.leo.model.models.Hospital" property-ref="account"/> -->
+		<!-- <many-to-one name="hospital" class="com.leo.model.models.Hospital" column="hospitalId" foreign-key="FK_account_hospital" index="IDX_account_hospitalId" not-null="false" unique="true"></many-to-one> -->
+    </class>  
+</hibernate-mapping> 

@@ -1,0 +1,38 @@
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+<div class="header navbar navbar-inverse navbar-fixed-top">
+   
+  <div class="header-inner">
+     
+     <a class="navbar-brand" href="index.html">
+     <img src="/images/logo.png" alt="NVDS" class="img-responsive" />
+     </a>
+               
+     <a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+     <img src="<c:url value='/images/menu-toggler.png'/>" alt=""/>
+     </a> 
+     
+     <ul class="nav navbar-nav pull-right">    
+        <li class="dropdown user">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+           <img alt="" src="<c:url value='/images/avatar1.jpg'/>"/>&nbsp;
+           <span class="username">${sessionScope.accountAuth.name}</span>&nbsp;-&nbsp;
+           <span class="username">${sessionScope.accountAuth.accountRole.name}</span>                      
+           <i class="icon-angle-down"></i>
+           </a>
+           <ul class="dropdown-menu">
+              <li><a href="<c:url value='/account/profile'/>"><i class="icon-user"></i>My account</a>
+              </li>
+              <li class="divider"></li>
+              </li>
+              <li><a href="login.html"><i class="icon-off"></i>Sign out</a>
+              </li>
+           </ul>
+        </li>
+        
+     </ul>     
+  </div>
+
+</div>
+<!-- END HEADER -->

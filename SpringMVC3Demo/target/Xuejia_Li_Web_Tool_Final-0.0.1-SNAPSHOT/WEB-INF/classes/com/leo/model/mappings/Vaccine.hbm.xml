@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 15, 2015 6:30:14 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.leo.model.models.Vaccine" table="vaccine">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="name" type="java.lang.String" not-null="true">
+            <column name="name" />
+        </property>
+        <property name="mfd" type="java.lang.String">
+            <column name="MFD" />
+        </property>
+        <property name="exp" type="java.lang.String">
+            <column name="EXP" />
+        </property>
+        <property name="vaccineType" type="java.lang.String">
+            <column name="VACCINETYPE" />
+        </property>
+        <property name="availability" type="int">
+            <column name="AVAILABILITY" />
+        </property>
+        <property name="price" type="float">
+            <column name="PRICE" />
+        </property>
+        <property name="disease" type="java.lang.String">
+            <column name="DISEASE" />
+        </property>
+        <set name="quotas" table="quota" inverse="true" cascade="all">
+        	<key column="vaccineId" />
+        	<one-to-many class="com.leo.model.models.Quota" />
+        </set>
+        <property name="hosInventory" type="int">
+            <column name="hosInventory" />
+        </property>
+        <one-to-one cascade="delete,save-update" name="inventory" class="com.leo.model.models.Inventory" property-ref="vaccine"></one-to-one>
+    </class>
+</hibernate-mapping>

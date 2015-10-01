@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 16, 2015 2:33:01 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.leo.model.models.Hospital" table="hospital">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="name" column="name" type="string" not-null="true"/>
+        <property name="address" type="java.lang.String" not-null="true">
+            <column name="ADDRESS" />
+        </property>
+        <property name="enable" column="enable" type="boolean" not-null="true"/>
+        <many-to-one name="state" class="com.leo.model.models.State" foreign-key="FK_hospital_state" index="IDX_hospital_stateId">
+            <column name="stateId" not-null="false"/>
+        </many-to-one>
+        <set name="accounts" table="account" inverse="true" cascade="all">
+        	<key column="hospitalId" />
+        	<one-to-many class="com.leo.model.models.Account" />
+        </set>
+        <!-- <one-to-one name="account" class="com.leo.model.models.Account" cascade="all" property-ref="hospital"></one-to-one> -->
+        <!-- <many-to-one cascade="all" name="account" class="com.leo.model.models.Account" unique="true">   
+            <column name="accountId" />   
+        </many-to-one> -->
+    </class>
+</hibernate-mapping>

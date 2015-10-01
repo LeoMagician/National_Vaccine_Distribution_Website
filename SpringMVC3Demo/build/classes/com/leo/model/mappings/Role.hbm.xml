@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>  
+    <class name="com.leo.model.models.Role" table="role" lazy="false">  
+
+	    <id name="id" column="id" type="integer" >
+	      <generator class="native" />
+	    </id>
+	    
+	    <version name="version" column="version" type="integer"/>
+	    <property name="name" column="name" type="string" not-null="true"/>
+	    <property name="enable" column="enable" type="boolean" not-null="true"/>
+	       
+	    <bag name="authorities" table="role_authority" lazy="false">
+	      <key column="roleId"/>
+	      <many-to-many column="authorityId" class="com.leo.model.models.Authority"/>
+	    </bag>
+    
+    </class>  
+</hibernate-mapping> 

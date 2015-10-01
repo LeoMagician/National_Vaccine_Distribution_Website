@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 23, 2015 10:02:30 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.leo.model.models.DC" table="dc">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="name" column="name" type="string" not-null="true"/>
+        <property name="address" type="java.lang.String" not-null="true">
+            <column name="address" />
+        </property>        
+        <many-to-one name="state" class="com.leo.model.models.State">
+            <column name="stateId" not-null="false" />
+        </many-to-one>
+        <one-to-one cascade="delete,save-update" name="cart" class="com.leo.model.models.Cart" property-ref="dc"></one-to-one>
+        <!-- <many-to-one name="account" class="com.leo.model.models.Account" cascade="save-update">
+            <column name="accountId" />
+        </many-to-one> -->
+    </class>
+</hibernate-mapping>

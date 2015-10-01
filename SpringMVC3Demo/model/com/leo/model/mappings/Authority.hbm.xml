@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>  
+    <class name="com.leo.model.models.Authority" table="authority" lazy="false"> 
+     
+	    <id name="id" column="id" type="integer" >
+	      <generator class="native" />
+	    </id>
+	    
+	    <version name="version" column="version" type="integer"/>
+	    <property name="enable" column="enable" type="boolean" not-null="true"/>
+	    <property name="name" column="name" type="string" not-null="true"/>  
+	    <property name="levelCode" column="levelCode" type="string" not-null="true"/>
+	    <property name="position" column="position" type="integer" not-null="true"/>
+	    <property name="theValue" column="theValue" type="string"/>	    
+	    <property name="url" column="url" type="string" not-null="true"/>
+	    <property name="matchUrl" column="matchUrl" type="string" not-null="true"/>
+	    <property name="itemIcon" column="itemIcon" type="string"/>
+	    
+	    <many-to-one name ="parent" class="com.leo.model.models.Authority" foreign-key="FK_authority_parentId_authority">
+		  <column name="parentId"/>
+		</many-to-one>
+	    
+	    <bag name="children" table="authority" inverse="true" lazy="false">
+	      <key column="parentId"/>
+	      <one-to-many class="com.leo.model.models.Authority"/>
+	    </bag>
+	    
+	    <bag name="roles" table="role_authority" inverse="true" lazy="extra">
+	      <key column="authorityId"/>
+	      <many-to-many column="roleId" class="com.leo.model.models.Role"/>
+	    </bag>
+    
+    </class>  
+</hibernate-mapping> 
